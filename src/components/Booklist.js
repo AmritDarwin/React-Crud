@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const BookList = () => {
 
-    const [books, setBooks] = useState( [] );
+    const [books, setBooks] = useState([]);
 
     useEffect(() => {
         getData();
@@ -16,9 +16,11 @@ const BookList = () => {
     };
 
     const deleteBook = async (id) => {
-        const res = await axios.delete(`http://localhost/crud-api/api/deletebook/${id}`);
-        if(res.data.status === 200){
-            getData();
+        if (window.confirm('Are you sure you wish to delete this item?')) {
+            const res = await axios.delete(`http://localhost/crud-api/api/deletebook/${id}`);
+            if (res.data.status === 200) {
+                getData();
+            }
         }
     }
 
@@ -26,16 +28,16 @@ const BookList = () => {
 
     const getBooks = books.map(book => {
         return <tr key={book.id}>
-                <td>{id ++}</td>
-                <td>{book.title}</td>
-                <td>{book.author}</td>
-                <td>{book.description}</td>
-                <td>{book.price}</td>
-                <td>
-                    <Link to={`/editbook/${book.id}`}  className="btn btn-sm btn-secondary mx-1">Edit</Link>
-                    <button onClick={()=>(deleteBook(book.id))} className="btn btn-sm btn-danger">Delete</button>
-                </td>
-            </tr>
+            <td>{id++}</td>
+            <td>{book.title}</td>
+            <td>{book.author}</td>
+            <td>{book.description}</td>
+            <td>₹{book.price}</td>
+            <td>
+                <Link to={`/editbook/${book.id}`} className="btn btn-sm btn-secondary mx-1">Edit</Link>
+                <button onClick={() => (deleteBook(book.id))} className="btn btn-sm btn-danger">Delete</button>
+            </td>
+        </tr>
     });
 
     return (
