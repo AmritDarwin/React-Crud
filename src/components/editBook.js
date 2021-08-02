@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import { useHistory } from 'react-router-dom';
 import axios from "axios";
 
 const EditBook = () => {
+
+    const history = useHistory();
 
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
@@ -33,8 +36,7 @@ const EditBook = () => {
         e.preventDefault();
         const res = await axios.put(`http://localhost/crud-api/api/updatebook/${id}`,formData);
         if(res.status === 200){
-            console.log(res);
-            alert('Book Updated');
+          history.push('/books');
         }
     };
 
