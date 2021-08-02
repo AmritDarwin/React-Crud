@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
+
 function Book() {
+
+  const history = useHistory();
 
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
@@ -23,7 +27,7 @@ function Book() {
       setAuthor('');
       setDescription('');
       setPrice('');
-      alert('book added');
+      history.push("/books");
     }
   }
 
