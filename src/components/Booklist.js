@@ -12,7 +12,7 @@ const BookList = () => {
 
     const getData = async () => {
         const res = await axios.get('http://localhost/crud-api/api/book');
-        setBooks(res.data.data);
+        setBooks(res.data);
     };
 
     const deleteBook = async (id) => {
@@ -45,7 +45,7 @@ const BookList = () => {
             <table className="table">
                 <thead>
                     <tr>
-                        <th>Sr No.</th>
+                        <th width="4%">Sr No.</th>
                         <th>Title</th>
                         <th>Author</th>
                         <th>Description</th>
